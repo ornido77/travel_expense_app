@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "demo@example.com",
+      "password": "password123",
+      "name": "Demo User"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "1",
+      "userId": "1",
+      "amount": 1250.5,
+      "date": "2026-09-20",
+      "category": "hotel",
+      "note": "Hotel accommodation"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "amount": 450,
+      "date": "2026-09-21",
+      "category": "restaurant",
+      "note": "Dinner with the client"
+    },
+    {
+      "id": "3",
+      "userId": "1",
+      "amount": 320,
+      "date": "2026-09-22",
+      "category": "taxi",
+      "note": "Airport transfer"
+    },
+    {
+      "userId": "1",
+      "amount": 1000,
+      "date": "2026-09-23",
+      "category": "hotel",
+      "note": "test",
+      "id": "UKoSbCkeLro"
+    },
+    {
+      "userId": "1",
+      "amount": 111,
+      "date": "2026-09-23",
+      "category": "restaurant",
+      "note": "arara",
+      "id": "hHMAf9slrwA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

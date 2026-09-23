@@ -34,14 +34,21 @@ final class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
   }
 
   @override
-  Future<ExpenseModel> addExpense(ExpenseModel expense) {
-    // TODO: implement addExpense
-    throw UnimplementedError();
+  Future<ExpenseModel> getExpense(String id) async {
+    final response = await _apiClient.get(
+      ApiConstants.endpoint('/expenses/$id'),
+    );
+
+    if (response is! Map) {
+      throw const FormatException('Invalid expense response.');
+    }
+
+    return ExpenseModel.fromJson(Map<String, dynamic>.from(response));
   }
 
   @override
-  Future<ExpenseModel> getExpense(String id) {
-    // TODO: implement getExpense
+  Future<ExpenseModel> addExpense(ExpenseModel expense) {
+    // TODO: implement addExpense
     throw UnimplementedError();
   }
 }

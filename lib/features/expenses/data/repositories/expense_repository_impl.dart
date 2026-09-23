@@ -29,12 +29,20 @@ final class ExpenseRepositoryImpl implements ExpenseRepository {
     }
   }
 
-  Failure _mapApiFailure(ApiException exception) {
-    if ((exception.statusCode ?? 0) >= 500) {
-      return ServerFailure(exception.message);
+  @override
+  Future<Either<Failure, Expense>> getExpense(String id) async {
+    try {
+      final model = await _dataSource.getExpense(id);
+      return Right(model.toEntity());
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
+    } on ApiException catch (e) {
+      return Left(_mapApiFailure(e));
+    } on FormatException catch (e) {
+      return Left(ParsingFailure(e.message));
+    } catch (_) {
+      return const Left(UnknownFailure('Unable to load the expense.'));
     }
-
-    return ServerFailure(exception.message);
   }
 
   @override
@@ -43,9 +51,11 @@ final class ExpenseRepositoryImpl implements ExpenseRepository {
     throw UnimplementedError();
   }
 
-  @override
-  Future<Either<Failure, Expense>> getExpense(String id) {
-    // TODO: implement getExpense
-    throw UnimplementedError();
+  Failure _mapApiFailure(ApiException exception) {
+    if ((exception.statusCode ?? 0) >= 500) {
+      return ServerFailure(exception.message);
+    }
+
+    return ServerFailure(exception.message);
   }
 }

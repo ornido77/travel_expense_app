@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../domain/entities/expense.dart';
 
@@ -13,10 +14,7 @@ class ExpenseCard extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    final dateText =
-        '${expense.date.month.toString().padLeft(2, '0')}/'
-        '${expense.date.day.toString().padLeft(2, '0')}/'
-        '${expense.date.year}';
+    final dateText = DateFormat('MMM d, y').format(expense.date);
 
     return Card(
       elevation: 0,

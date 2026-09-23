@@ -91,10 +91,18 @@ class ExpenseCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    size: 20,
-                    color: colorScheme.onSurfaceVariant,
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: colorScheme.surfaceContainerHighest,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward_rounded,
+                      size: 17,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),

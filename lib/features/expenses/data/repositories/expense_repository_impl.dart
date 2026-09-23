@@ -5,6 +5,7 @@ import '../../../../core/error/failures.dart';
 import '../../domain/entities/expense.dart';
 import '../../domain/repositories/expense_repository.dart';
 import '../datasources/expense_remote_data_source.dart';
+import '../models/expense_model.dart';
 
 final class ExpenseRepositoryImpl implements ExpenseRepository {
   final ExpenseRemoteDataSource _dataSource;
@@ -46,9 +47,21 @@ final class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<Failure, Expense>> addExpense(Expense expense) {
-    // TODO: implement addExpense
-    throw UnimplementedError();
+  Future<Either<Failure, Expense>> addExpense(Expense expense) async {
+    try {
+      final model = await _dataSource.addExpense(
+        ExpenseModel.fromEntity(expense),
+      );
+      return Right(model.toEntity());
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
+    } on ApiException catch (e) {
+      return Left(_mapApiFailure(e));
+    } on FormatException catch (e) {
+      return Left(ParsingFailure(e.message));
+    } catch (_) {
+      return const Left(UnknownFailure('Unable to add the expense.'));
+    }
   }
 
   Failure _mapApiFailure(ApiException exception) {

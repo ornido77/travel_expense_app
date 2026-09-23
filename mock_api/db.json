@@ -2,9 +2,21 @@
   "users": [
     {
       "id": "1",
-      "email": "demo@example.com",
-      "password": "password123",
-      "name": "Demo User"
+      "email": "user1@test.com",
+      "password": "pass123",
+      "name": "Demo User 1"
+    },
+    {
+      "id": "2",
+      "email": "user2@test.com",
+      "password": "pass123",
+      "name": "Demo User 2"
+    },
+    {
+      "id": "3",
+      "email": "user3@test.com",
+      "password": "pass123",
+      "name": "Demo User 3"
     }
   ],
   "expenses": [
@@ -33,20 +45,12 @@
       "note": "Airport transfer"
     },
     {
-      "userId": "1",
-      "amount": 1000,
-      "date": "2026-09-23",
-      "category": "hotel",
-      "note": "test",
-      "id": "UKoSbCkeLro"
-    },
-    {
-      "userId": "1",
-      "amount": 111,
+      "userId": "2",
+      "amount": 100,
       "date": "2026-09-23",
       "category": "restaurant",
-      "note": "arara",
-      "id": "hHMAf9slrwA"
+      "note": "entrance fee",
+      "id": "xzQqnNP"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

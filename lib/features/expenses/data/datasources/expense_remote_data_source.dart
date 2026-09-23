@@ -47,8 +47,16 @@ final class ExpenseRemoteDataSourceImpl implements ExpenseRemoteDataSource {
   }
 
   @override
-  Future<ExpenseModel> addExpense(ExpenseModel expense) {
-    // TODO: implement addExpense
-    throw UnimplementedError();
+  Future<ExpenseModel> addExpense(ExpenseModel expense) async {
+    final response = await _apiClient.post(
+      ApiConstants.endpoint('/expenses'),
+      body: expense.toJson()..remove('id'),
+    );
+
+    if (response is! Map) {
+      throw const FormatException('Invalid created expense response.');
+    }
+
+    return ExpenseModel.fromJson(Map<String, dynamic>.from(response));
   }
 }
